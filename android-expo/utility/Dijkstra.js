@@ -1,10 +1,5 @@
-const fs = require('fs');
-
-const floorData16 = fs.readFileSync('../floor_plans/floor_16/floor.json');
-const floor16 = JSON.parse(floorData16);
-
-const floorData17 = fs.readFileSync('../floor_plans/floor_17/floor.json');
-const floor17 = JSON.parse(floorData17);
+import floor16 from "../floor_plans/floor_16/floor.json";
+import floor17 from "../floor_plans/floor_17/floor.json";
 
 const penalty = 1;
 const PI = 3.1415926;
@@ -146,4 +141,4 @@ const getPath = (source, destination) => {
 	}
 };
 
-console.log(getPath("16.3G.2", "16.3C.1"));
+export default getPath;
