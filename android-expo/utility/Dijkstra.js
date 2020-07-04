@@ -32,10 +32,12 @@ class PriorityQueue {
     }
   };
 
-   dequeue() {
+  dequeue() {
     let value = this.collection.shift();
     return value;
-  };  isEmpty() {
+  };  
+
+  isEmpty() {
     return (this.collection.length === 0) 
   };
 }
@@ -44,6 +46,7 @@ const Dijkstra = (source, destination) => {
 	let distance = {};
 	let backtrace = {};
 	let pq = new PriorityQueue();
+	let visited = {};
 	distance[source] = 0;
 
 	pathNodeNames.forEach(node => {
@@ -57,10 +60,12 @@ const Dijkstra = (source, destination) => {
 	while (!pq.isEmpty()) {
 		let next = pq.dequeue();
 		let currentNode = next[0];
+		visited[currentNode] = true;
 
 		pathNodes[currentNode]["green_adjacent"].forEach(node => {
 			let newDistance = distance[currentNode] + get_distance(pathNodes[currentNode]["coords"], pathNodes[node]["coords"]);
-			if (newDistance < distance[node]) {
+
+			if (!visited[node] && newDistance < distance[node]) {
 				distance[node] = newDistance;
 				backtrace[node] = currentNode;
 				pq.enqueue([node, distance]);
