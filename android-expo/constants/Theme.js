@@ -1,5 +1,9 @@
 export default {
   COLORS: {
+    MS_GREEN: '#008b8b',
+    MS_ORANGE: '#ff8c00',
+    MS_SALMON: '#ffa07a',
+    MS_MAGENTA: '#8b008b',
     DEFAULT: '#172B4D',
     PRIMARY: '#5E72E4',
     SECONDARY: '#F7FAFC',

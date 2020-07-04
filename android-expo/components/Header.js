@@ -64,8 +64,8 @@ class Header extends React.Component {
     switch (routeName) {
       case 'Home':
         return ([
-          <BellButton key='chat-home' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-home' navigation={navigation} isWhite={white} />
+          // <BellButton key='chat-home' navigation={navigation} isWhite={white} />,
+          // <BasketButton key='basket-home' navigation={navigation} isWhite={white} />
         ]);
       case 'Deals':
         return ([
@@ -223,6 +223,7 @@ const styles = StyleSheet.create({
     paddingBottom: theme.SIZES.BASE * 1.5,
     paddingTop: iPhoneX ? theme.SIZES.BASE * 4 : theme.SIZES.BASE,
     zIndex: 5,
+    backgroundColor: argonTheme.COLORS.MS_GREEN
   },
   shadow: {
     backgroundColor: theme.COLORS.WHITE,

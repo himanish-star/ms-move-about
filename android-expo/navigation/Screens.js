@@ -112,7 +112,7 @@ const HomeStack = createStackNavigator(
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
-        header: <Header search options title="Home" navigation={navigation} />
+        header: <Header white title="Microsoft Move-About" navigation={navigation} />
       })
     },
     Pro: {
