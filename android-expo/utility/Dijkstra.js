@@ -1,9 +1,15 @@
 const fs = require('fs');
 
-const floorData = fs.readFileSync('../floor_plans/floor_16/floor.json');
-const floor = JSON.parse(floorData);
-const pathNodes = floor["green_nodes"];
-const pathNodeNames = Object.keys(pathNodes);
+const floorData16 = fs.readFileSync('../floor_plans/floor_16/floor.json');
+const floor16 = JSON.parse(floorData16);
+
+const floorData17 = fs.readFileSync('../floor_plans/floor_17/floor.json');
+const floor17 = JSON.parse(floorData17);
+
+const floors = {
+	'16': floor16,
+	'17': floor17
+};
 
 const get_distance = (p1, p2) => {
 	return Math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2);
@@ -42,14 +48,15 @@ class PriorityQueue {
   };
 }
 
-const Dijkstra = (source, destination) => {
+const Dijkstra = (source, destination, floorNumber) => {
 	let distance = {};
 	let backtrace = {};
 	let pq = new PriorityQueue();
 	let visited = {};
 	distance[source] = 0;
 
-	pathNodeNames.forEach(node => {
+	const pathNodes = floors[floorNumber]["green_nodes"];
+	Object.keys(pathNodes).forEach(node => {
 		if (node != source) {
 			distance[node] = Infinity;
 		}
@@ -92,18 +99,33 @@ const getDoorNode = (node) => {
 };
 
 const getPathNode = (node) => {
-	return floor["blue_nodes"][node]["green_adjacent"];
+	return floors[node.split('.')[0]]["blue_nodes"][node]["green_adjacent"];
 };
 
-const getPath = (source, destination) => {
+const getPathSameFloor = (source, destination) => {
+	let floorNumber = source.split('.')[0];
 	let sourceDoorNode = getDoorNode(source), destinationDoorNode = getDoorNode(destination);
 	let sourcePathNode = getPathNode(sourceDoorNode), destinationPathNode = getPathNode(destinationDoorNode);
-	let path = Dijkstra(sourcePathNode, destinationPathNode);
-	path.unshift(sourceDoorNode);
+	let path = Dijkstra(sourcePathNode, destinationPathNode, floorNumber);
+	if (source !== sourceDoorNode) {
+		path.unshift(sourceDoorNode);
+	}
 	path.unshift(source);
-	path.push(destinationDoorNode);
+	if (destinationDoorNode !== destination) {
+		path.push(destinationDoorNode);
+	}
 	path.push(destination);
 	return path;
 };
 
-console.log(getPath("16.3H.1", "16.3B.1"));
+const getPath = (source, destination) => {
+	let sourceFloor = source.split('.')[0], destinationFloor = destination.split('.')[0];
+	if (sourceFloor === destinationFloor) {
+		return getPathSameFloor(source, destination);
+	} else {
+		let pathToLift = getPathSameFloor(source, sourceFloor + ".LIFT");
+		return pathToLift.concat(getPathSameFloor(destinationFloor + ".LIFT", destination));
+	}
+};
+
+console.log(getPath("16.3H.1", "17.3B.1"));
