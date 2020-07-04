@@ -230,91 +230,120 @@
   },
   "blue_nodes": {
     "16.2A": {
-      "coords": [6,7]
+      "coords": [6,7],
+      "green_adjacent": "p1"
     },
     "16.3A": {
-      "coords": [16,6]
+      "coords": [16,6],
+      "green_adjacent": "p3"
     },
     "16.5F": {
-      "coords": [18,7]
+      "coords": [18,7],
+      "green_adjacent": "p4"
     },
     "16.11A": {
-      "coords": [18,9]
+      "coords": [18,9],
+      "green_adjacent": "p4"
     },
     "16.3B": {
-      "coords": [19,6]
+      "coords": [19,6],
+      "green_adjacent": "p5"
     },
     "16.3C": {
-      "coords": [21,8]
+      "coords": [21,8],
+      "green_adjacent": "p5"
     },
     "16.6B": {
-      "coords": [19,10]
+      "coords": [19,10],
+      "green_adjacent": "p6"
     },
     "16.6A": {
-      "coords": [21,10]
+      "coords": [21,10],
+      "green_adjacent": "p6"
     },
     "16.6C": {
-      "coords": [20,12]
+      "coords": [20,12],
+      "green_adjacent": "p7"
     },
     "16.9A": {
-      "coords": [20,13]
+      "coords": [20,13],
+      "green_adjacent": "p8"
     },
     "16.4B": {
-      "coords": [22,13]
+      "coords": [22,13],
+      "green_adjacent": "p8"
     },
     "16.5B": {
-      "coords": [24,14]
+      "coords": [24,14],
+      "green_adjacent": "p10"
     },
     "16.3D": {
-      "coords": [26,14]
+      "coords": [26,14],
+      "green_adjacent": "p11"
     },
     "16.5A": {
-      "coords": [26,12]
+      "coords": [26,12],
+      "green_adjacent": "p11"
     },
     "16.3E": {
-      "coords": [21,17]
+      "coords": [21,17],
+      "green_adjacent": "p12"
     },
     "16.3F": {
-      "coords": [15,21]
+      "coords": [15,21],
+      "green_adjacent": "p19"
     },
     "16.5C": {
-      "coords": [13,20]
+      "coords": [13,20],
+      "green_adjacent": "p20"
     },
     "16.8A": {
-      "coords": [12,21]
+      "coords": [12,21],
+      "green_adjacent": "p20"
     },
     "16.4A": {
-      "coords": [10,21]
+      "coords": [10,21],
+      "green_adjacent": "p20"
     },
     "16.6D": {
-      "coords": [11,20]
+      "coords": [11,20],
+      "green_adjacent": "p21"
     },
     "16.20": {
-      "coords": [11,18]
+      "coords": [11,18],
+      "green_adjacent": "p22"
     },
     "16.3G": {
-      "coords": [9,19]
+      "coords": [9,19],
+      "green_adjacent": "p22"
     },
     "16.5D": {
-      "coords": [9,16]
+      "coords": [9,16],
+      "green_adjacent": "p23"
     },
     "16.9B": {
-      "coords": [9,15]
+      "coords": [9,15],
+      "green_adjacent": "p23"
     },
     "16.3H": {
-      "coords": [6,14]
+      "coords": [6,14],
+      "green_adjacent": "p24"
     },
     "16.14A": {
-      "coords": [7,12]
+      "coords": [7,12],
+      "green_adjacent": "p25"
     },
     "16.3I": {
-      "coords": [4,11]
+      "coords": [4,11],
+      "green_adjacent": "p26"
     },
     "16.5E": {
-      "coords": [6,9]
+      "coords": [6,9],
+      "green_adjacent": "p27"
     },
     "16.LIFT": {
-      "coords": [15,12]
+      "coords": [15,12],
+      "green_adjacent": "p15"
     }
   }
 }
