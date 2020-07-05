@@ -1,7 +1,7 @@
 import floor16 from "../floor_plans/floor_16/floor.json";
 import floor17 from "../floor_plans/floor_17/floor.json";
 
-const penalty = 1;
+const penalty = 0;
 const PI = 3.1415926;
 
 const floors = {
@@ -42,7 +42,7 @@ class PriorityQueue {
   	};
 }
 
-const get_distance = (p1, p2) => {
+const getDistance = (p1, p2) => {
 	return Math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2);
 };
 
@@ -78,7 +78,7 @@ const Dijkstra = (source, destination, floorNumber) => {
 		visited[currentNode] = true;
 
 		pathNodes[currentNode]["green_adjacent"].forEach(node => {
-			let newDistance = distance[currentNode] + get_distance(pathNodes[currentNode]["coords"], pathNodes[node]["coords"]);
+			let newDistance = distance[currentNode] + getDistance(pathNodes[currentNode]["coords"], pathNodes[node]["coords"]);
 			if (parent[currentNode] != -1) {
 				let angle = getAngle(pathNodes[parent[currentNode]]["coords"], pathNodes[currentNode]["coords"], pathNodes[node]["coords"]);
 				angle = 180 - Math.abs(angle);
@@ -138,7 +138,50 @@ const getPath = (source, destination) => {
 	} else {
 		let pathToLift = getPathSameFloor(source, sourceFloor + ".LIFT");
 		return pathToLift.concat(getPathSameFloor(destinationFloor + ".LIFT", destination));
+	}	
+};
+
+const getPathInfo = (path) => {
+	let coordinates = [];
+	let floorNumber = path[0].split('.')[0];
+	for (let i=0 ; i<path.length ; i++) {
+		let node = path[i];
+		let nodeArray = node.split('.');
+		if (nodeArray[nodeArray.length - 1] == 'LIFT') {
+			floorNumber = nodeArray[0];
+		}
+		if (node in floors[floorNumber]["green_nodes"]) {
+			coordinates.push(floors[floorNumber]["green_nodes"][node]["coords"]);
+		} else if (node in floors[floorNumber]["blue_nodes"]) {
+			coordinates.push(floors[floorNumber]["blue_nodes"][node]["coords"]);
+		} else {
+			coordinates.push(floors[floorNumber]["red_nodes"][node]["coords"]);
+		}
 	}
+
+	let distance = [];
+	for (let i=1 ; i<coordinates.length ; i++) {
+		distance.push(getDistance(coordinates[i], coordinates[i-1]));
+	}
+
+	let time = [];
+	for (let i=0 ; i<distance.length ; i++) {
+		time.push(distance[i] / 3);
+	}
+	for (let i=1 ; i<distance.length ; i++) {
+		distance[i] += distance[i-1];
+		time[i] += time[i-1];
+	}
+
+	let deviation = [];
+	for (let i=2 ; i<coordinates.length ; i++) {
+		let angle = getAngle(coordinates[i-2], coordinates[i-1], coordinates[i]);
+		let dev = (180 - Math.abs(angle)) * (angle / Math.abs(angle));
+		if (isNaN(dev)) dev = 0;
+		deviation.push(dev);
+	}
+
+	return [ distance, time, deviation ];
 };
 
 export default getPath;
