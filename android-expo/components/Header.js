@@ -219,11 +219,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   navbar: {
+    fontFamily: argonTheme.FONTS.Outlook_Font,
     paddingVertical: 0,
     paddingBottom: theme.SIZES.BASE * 1.5,
     paddingTop: iPhoneX ? theme.SIZES.BASE * 4 : theme.SIZES.BASE,
     zIndex: 5,
-    backgroundColor: argonTheme.COLORS.MS_GREEN
+    backgroundColor: argonTheme.COLORS.Outlook_Dark_theme
   },
   shadow: {
     backgroundColor: theme.COLORS.WHITE,

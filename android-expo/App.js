@@ -6,6 +6,7 @@ import { Block, GalioProvider } from 'galio-framework';
 
 import Screens from './navigation/Screens';
 import { Images, articles, argonTheme } from './constants';
+import * as Font from "expo-font";
 
 // cache app images
 const assetImages = [
@@ -34,10 +35,18 @@ function cacheImages(images) {
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
+    fontLoaded: false,
   }
-  
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      'roboto-medium': require('./screens/fonts/Roboto/Roboto-Medium.ttf')
+    });
+    this.setState({fontLoaded: true});
+  }
+
   render() {
-    if(!this.state.isLoadingComplete) {
+    if(!this.state.isLoadingComplete || !this.state.fontLoaded) {
       return (
         <AppLoading
           startAsync={this._loadResourcesAsync}

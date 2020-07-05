@@ -1,5 +1,10 @@
 export default {
   COLORS: {
+    Outlook_Dark_theme: "#005A9E",
+    Outlook_Primary_theme: "#0078d4",
+    Outlook_Light_blue: "#C7E0F4",
+    Outlook_Light_grey: "#edebe9",
+    Outlook_User_red_dark: "#a4262c",
     MS_GREEN: '#008b8b',
     MS_ORANGE: '#ff8c00',
     MS_SALMON: '#ffa07a',
@@ -32,5 +37,8 @@ export default {
     BORDER: '#CAD1D7',
     WHITE: '#FFFFFF',
     BLACK: '#000000'
+  },
+  FONTS: {
+    Outlook_Font: "roboto-medium"
   }
 };

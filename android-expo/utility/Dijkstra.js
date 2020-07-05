@@ -131,7 +131,7 @@ const getPathSameFloor = (source, destination) => {
 	return path;
 };
 
-const getPath = (source, destination) => {
+export const getPath = (source, destination) => {
 	let sourceFloor = source.split('.')[0], destinationFloor = destination.split('.')[0];
 	if (sourceFloor === destinationFloor) {
 		return getPathSameFloor(source, destination);
@@ -141,7 +141,7 @@ const getPath = (source, destination) => {
 	}	
 };
 
-const getPathInfo = (path) => {
+export const getPathInfo = (path) => {
 	let coordinates = [];
 	let floorNumber = path[0].split('.')[0];
 	for (let i=0 ; i<path.length ; i++) {
@@ -183,5 +183,3 @@ const getPathInfo = (path) => {
 
 	return [ distance, time, deviation ];
 };
-
-export default getPath;

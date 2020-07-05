@@ -1,6 +1,6 @@
 import floor_16_json from "../floor_plans/floor_16/floor.json";
 import floor_17_json from "../floor_plans/floor_17/floor.json";
-import getPath from "./Dijkstra";
+import {getPath} from "./Dijkstra";
 
 const floorPlansJson = {
     16: floor_16_json,
@@ -22,5 +22,6 @@ function convertIdToCoords(ids, floor, bh, bw, mapHeight) {
 export function getShortestPath(sourceRoomId, destinationRoomId, floor, bh, bw, mapHeight) {
     // console.log(sourceRoomId, destinationRoomId);
     // console.log(getPath(sourceRoomId, destinationRoomId), )
-    return convertIdToCoords(getPath(sourceRoomId, destinationRoomId), floor, bh, bw, mapHeight).join(" ").toString();
+    const pathAsStringId = getPath(sourceRoomId, destinationRoomId);
+    return [convertIdToCoords(pathAsStringId, floor, bh, bw, mapHeight).join(" ").toString(),pathAsStringId];
 }
