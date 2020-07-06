@@ -1,7 +1,6 @@
 import floor16 from "../floor_plans/floor_16/floor.json";
 import floor17 from "../floor_plans/floor_17/floor.json";
 
-const penalty = 0;
 const PI = 3.1415926;
 
 const floors = {
@@ -55,7 +54,7 @@ const getAngle = (p1, p2, p3) => {
 	return Math.floor(angle * 180 / PI + 0.5);
 };
 
-const Dijkstra = (source, destination, floorNumber) => {
+const Dijkstra = (source, destination, floorNumber, penalty) => {
 	let distance = {};
 	let parent = {};
 	let pq = new PriorityQueue();
@@ -115,11 +114,11 @@ const getPathNode = (node) => {
 	return floors[node.split('.')[0]]["blue_nodes"][node]["green_adjacent"];
 };
 
-const getPathSameFloor = (source, destination) => {
+const getPathSameFloor = (source, destination, penalty) => {
 	let floorNumber = source.split('.')[0];
 	let sourceDoorNode = getDoorNode(source), destinationDoorNode = getDoorNode(destination);
 	let sourcePathNode = getPathNode(sourceDoorNode), destinationPathNode = getPathNode(destinationDoorNode);
-	let path = Dijkstra(sourcePathNode, destinationPathNode, floorNumber);
+	let path = Dijkstra(sourcePathNode, destinationPathNode, floorNumber, penalty);
 	if (source !== sourceDoorNode) {
 		path.unshift(sourceDoorNode);
 	}
@@ -131,13 +130,13 @@ const getPathSameFloor = (source, destination) => {
 	return path;
 };
 
-export const getPath = (source, destination) => {
+export const getPath = (source, destination, penalty=0) => {
 	let sourceFloor = source.split('.')[0], destinationFloor = destination.split('.')[0];
 	if (sourceFloor === destinationFloor) {
-		return getPathSameFloor(source, destination);
+		return getPathSameFloor(source, destination, penalty);
 	} else {
-		let pathToLift = getPathSameFloor(source, sourceFloor + ".LIFT");
-		return pathToLift.concat(getPathSameFloor(destinationFloor + ".LIFT", destination));
+		let pathToLift = getPathSameFloor(source, sourceFloor + ".LIFT", penalty);
+		return pathToLift.concat(getPathSameFloor(destinationFloor + ".LIFT", destination, penalty));
 	}	
 };
 
@@ -183,3 +182,12 @@ export const getPathInfo = (path) => {
 
 	return [ distance, time, deviation ];
 };
+
+export const isValidRoomId = (id) => {
+	let floorNumber = id.split('.')[0];
+	if (!(floorNumber in floors)) {
+		return false;
+	}
+	return (id in floors[floorNumber]["red_nodes"] || id in floors[floorNumber]["blue_nodes"]);
+};
+
