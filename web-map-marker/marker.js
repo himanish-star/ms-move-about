@@ -49,6 +49,7 @@ $(() => {
     const hideDiv = () => {
         infoDiv.style.display = "none";
     };
+    hideDiv();
 
     const showDiv = () => {
         infoDiv.style.display = "block";
@@ -58,12 +59,31 @@ $(() => {
         addNameToMarkers(typeInputDiv.val(), xInputDiv.val(), yInputDiv.val(), nameInputDiv.val());
         hideDiv();
         divOpen = false;
+        nameInputDiv.val('');
     });
 
     cancelBtn.click(() => {
         Markers[typeInputDiv.val()].pop();
         hideDiv();
         divOpen = false;
+    });
+
+    $('#save_json').click(() => {
+        let output_json = {};
+        for (let type in Markers) {
+            let keyString = type + "_nodes";
+            if (!(keyString in output_json)) {
+                output_json[keyString] = {};
+            }
+            for (let i=0 ; i<Markers[type].length ; i++) {
+                let marker_i = Markers[type][i];
+                if (!(marker_i.name in output_json[keyString])) {
+                    output_json[keyString][marker_i.name] = {};
+                }
+                output_json[keyString][marker_i.name]["coords"] = [Number(marker_i.XPos), Number(marker_i.YPos)];
+            }
+        }
+        localStorage.setItem('json', JSON.stringify(output_json));
     });
 
     canvas.click((mouse) => {
