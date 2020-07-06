@@ -1,2 +1,32 @@
 <canvas id="Canvas" width="700" height="600"></canvas>
+<p>Select Marker</p>
+
+<style type="text/css">
+	.info {
+		border: 1px solid black;
+		height: 200px;
+		width: 300px;
+		background-color: white;
+		z-index: 1000;
+	}
+</style>
+<select name="marker-type" id="m_type">
+	<option value="red">Red</option>
+	<option value="blue">Blue</option>
+	<option value="green">Green</option>
+	<option value="yellow">Yellow</option>
+</select>
+
+<div id="m_input" class="info">
+	<h2>Marker Details</h2>
+	Enter Name: <input type="text" id="name_inp" /> <br>
+	X-coordinate: <input type="number" id="x_inp" /> <br>
+	Y-coordinate: <input type="number" id="y_inp" /> <br>
+	Type: <input type="text" id="type_inp" /> <br>
+	<button id="submitBtn">Submit</button>
+	<button id="cancelBtn">Cancel</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="./marker.js"></script>
+	
