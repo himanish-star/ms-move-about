@@ -17,6 +17,18 @@ $(() => {
 
     const mapSprite = new Image();
     mapSprite.src = "../android-expo/floor_plans/floor_16/floor_bg.png";
+    /*mapSprite.style.display = "block";
+    mapSprite.style.maxWidth = "700px";
+    mapSprite.style.height = "auto";
+    mapSprite.style.width = "auto";
+    mapSprite.style.maxHeight = "600px";*/
+    /*
+    * display: block;
+    * max-width:230px;
+    * max-height:95px;
+    * width: auto;
+    * height: auto;
+    * */
 
     let divOpen = false;
 
@@ -112,8 +124,9 @@ $(() => {
 
     const draw = () => {
         context.fillStyle = "#000";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(mapSprite, 0, 0, 700, 600);
+        context.fillRect(0, 0, canvas.width(), canvas.height());
+        context.drawImage(mapSprite, 0, 0, mapSprite.width, mapSprite.height,     // source rectangle
+            0, 0, canvas.width(), canvas.height())
 
         for (let type in Markers) {
             for (let i = 0; i < Markers[type].length; i++) {
