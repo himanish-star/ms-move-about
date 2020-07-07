@@ -10,16 +10,17 @@ $(() => {
         toggleState = !toggleState;
     });
 
-    const markerInput = $('#m_type');
-    let markerType = markerInput.val();
+    let markerType = "red";
 
     const infoDiv = document.getElementById('m_input');
+    const markerSelect = document.getElementById('marker_select');
     const submitBtn = $('#submitBtn');
     const cancelBtn = $('#cancelBtn');
     const nameInputDiv = $('#name_inp');
     const typeInputDiv = $('#type_inp');
     const xInputDiv = $('#x_inp');
     const yInputDiv = $('#y_inp');
+    const redM = $('#m_red'), blueM = $('#m_blue'), greenM = $('#m_green'), yellowM = $('#m_yellow');
 
     const mapSprite = new Image();
     mapSprite.src = "./floor_plans/floor_16/floor_bg.png";
@@ -59,6 +60,8 @@ $(() => {
         el.style.left = x + 'px';
         el.style.top = y + 'px';
     };
+    moveDiv(markerSelect, 1100, 200);
+    moveDiv(document.getElementById('marker_info'), 80, 220);
 
     function drawBoard(displayOn){
         const context = canvas[0].getContext("2d");
@@ -103,6 +106,62 @@ $(() => {
         divOpen = false;
     });
 
+    redM.click(() => {
+        markerType = "red";
+        redM.text("Red *");
+        blueM.text("Blue");
+        greenM.text("Green");
+        yellowM.text("Yellow");
+    });
+
+    blueM.click(() => {
+        markerType = "blue";
+        redM.text("Red");
+        blueM.text("Blue *");
+        greenM.text("Green");
+        yellowM.text("Yellow");
+    });
+
+    greenM.click(() => {
+        markerType = "green";
+        redM.text("Red");
+        blueM.text("Blue");
+        greenM.text("Green *");
+        yellowM.text("Yellow");
+    });
+
+    yellowM.click(() => {
+        markerType = "yellow";
+        redM.text("Red");
+        blueM.text("Blue");
+        greenM.text("Green");
+        yellowM.text("Yellow *");
+    });
+
+    redM.hover(() => {
+        redM.css('background-color', '#f26565');
+    }, () => {
+        redM.css('background-color', '#f93535');
+    });
+
+    blueM.hover(() => {
+        blueM.css('background-color', '#6694ea');
+    }, () => {
+        blueM.css('background-color', '#355fae');
+    });
+
+    greenM.hover(() => {
+        greenM.css('background-color', '#93d973');
+    }, () => {
+        greenM.css('background-color', '#64c13a');
+    });
+
+    yellowM.hover(() => {
+        yellowM.css('background-color', '#f4d26a');
+    }, () => {
+        yellowM.css('background-color', '#f9c835');
+    });
+
     function download(content, fileName, contentType) {
         var a = document.createElement("a");
         var file = new Blob([content], {type: contentType});
@@ -140,7 +199,7 @@ $(() => {
             let mouseXPos = (mouse.clientX - rect.left);
             let mouseYPos = (mouse.clientY - rect.top);
 
-            markerType = markerInput.val();
+            // markerType = markerInput.val();
             let marker = new Marker(markerType);
             marker.XPos = mouseXPos - (marker.Width / 2);
             marker.YPos = mouseYPos - marker.Height;
