@@ -19,9 +19,9 @@ function convertIdToCoords(ids, floor, bh, bw, mapHeight) {
     });
 }
 
-export function getShortestPath(sourceRoomId, destinationRoomId, floor, bh, bw, mapHeight) {
+export function getShortestPath(sourceRoomId, destinationRoomId, floor, bh, bw, mapHeight, penalty) {
     // console.log(sourceRoomId, destinationRoomId);
     // console.log(getPath(sourceRoomId, destinationRoomId), )
-    const pathAsStringId = getPath(sourceRoomId, destinationRoomId);
+    const pathAsStringId = getPath(sourceRoomId, destinationRoomId, penalty);
     return [convertIdToCoords(pathAsStringId, floor, bh, bw, mapHeight).join(" ").toString(),pathAsStringId];
 }

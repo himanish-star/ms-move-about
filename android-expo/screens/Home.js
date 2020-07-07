@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image as ImgReact, Text, View, ImageBackground, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { Image as ImgReact, CheckBox, Text, View, ImageBackground, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { Block, theme } from 'galio-framework';
 import Svg, {G, ClipPath, Polygon, Image, Line, Text as TextSvg, Circle, Rect, Polyline} from 'react-native-svg';
 import {Icon, Button, ListItem, Card, Input} from 'react-native-elements'
@@ -8,7 +8,7 @@ import {EventRegister} from "react-native-event-listeners";
 import { Bubbles, DoubleBounce, Bars, Pulse } from 'react-native-loader';
 import {argonTheme} from "../constants";
 import {getShortestPath} from "../utility/path_compute";
-import {getPathInfo} from "../utility/Dijkstra";
+import {getPathInfo, isValidRoomId} from "../utility/Dijkstra";
 import floor_16_json from "../floor_plans/floor_16/floor.json";
 import {
   Card as MaterialCard,
@@ -81,6 +81,9 @@ class Home extends React.Component {
     distToTurn: 0,
     dirToTurn: "straight",
     timeToTurn: 0,
+    pathPenalty: 0,
+    validSrcId: true,
+    validDestId: true,
     waitForLift: false,
     level_animation: false,
     levels: [],
@@ -98,7 +101,7 @@ class Home extends React.Component {
 
     let time_counter = 1;
     setTimeout(() => {this.setState({level_animation: true});}, time_counter*1000); time_counter++;
-    console.log(this.state);
+    // console.log(this.state);
     for(let i=0;i<coords_to_travel.length-1;i++) {
       const distance = i===0 ? this.state.polypath[0][i] : this.state.polypath[0][i] - this.state.polypath[0][i-1];
       const time = i===0 ? this.state.polypath[1][i] : this.state.polypath[1][i] - this.state.polypath[1][i-1];
@@ -246,7 +249,10 @@ class Home extends React.Component {
                       polypath: null,
                       current_floor: 16,
                       gx: 0,
+                      validSrcId: true,
+                      validDestId: true,
                       gy: 0,
+                      pathPenalty: 0,
                       levels: [],
                       navigationOn: false,
                       navigationComplete: false,
@@ -293,7 +299,7 @@ class Home extends React.Component {
   generatePolylines () {
     if(this.state.levels.length===2) {
       const lc_levels = this.state.levels;
-      const pathDetails = getShortestPath(this.state.src,`${lc_levels[0]}.LIFT`,lc_levels[0],bh,bw,mapHeight);
+      const pathDetails = getShortestPath(this.state.src,`${lc_levels[0]}.LIFT`,lc_levels[0],bh,bw,mapHeight,this.state.pathPenalty);
       this.setState({
         current_floor: lc_levels[0],
         levels: [lc_levels[1]],
@@ -306,7 +312,7 @@ class Home extends React.Component {
     } else if(this.state.levels.length===1) {
       const lc_levels = this.state.levels;
       if(+(this.state.src.split(".")[0])===+(this.state.dest.split(".")[0])) {
-        const pathDetails = getShortestPath(this.state.src,this.state.dest,lc_levels[0],bh,bw,mapHeight);
+        const pathDetails = getShortestPath(this.state.src,this.state.dest,lc_levels[0],bh,bw,mapHeight,this.state.pathPenalty);
         this.setState({
           current_floor: lc_levels[0],
           levels: [],
@@ -314,7 +320,7 @@ class Home extends React.Component {
           polypath: getPathInfo(pathDetails[1])
         });
       } else {
-        const pathDetails = getShortestPath(`${lc_levels[0]}.LIFT`,this.state.dest,lc_levels[0],bh,bw,mapHeight);
+        const pathDetails = getShortestPath(`${lc_levels[0]}.LIFT`,this.state.dest,lc_levels[0],bh,bw,mapHeight,this.state.pathPenalty);
         this.setState({
           current_floor: lc_levels[0],
           levels: [],
@@ -328,6 +334,35 @@ class Home extends React.Component {
   show_cursor() {
     if(this.state.level_animation) {
       return(<Circle x={this.state.gx} y={this.state.gy} opacity={1} fill={argonTheme.COLORS.Outlook_User_red_dark} r={5}/>);
+    }
+  }
+
+  showNavBtn () {
+    if(this.state.validSrcId && this.state.validDestId) {
+      return(
+          <CardAction
+              separator={true}
+              inColumn={false}>
+            <CardButton
+                onPress={() => {this.beginNavigation()}}
+                title="Start Navigation"
+                titleStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
+                color={argonTheme.COLORS.Outlook_Dark_theme}
+            />
+          </CardAction>
+      )
+    } else {
+      return(
+          <CardAction
+              separator={true}
+              inColumn={false}>
+            <CardButton
+                onPress={() => {}}
+                title=""
+                titleStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
+                color={argonTheme.COLORS.Outlook_Dark_theme}
+            />
+          </CardAction>)
     }
   }
 
@@ -371,28 +406,34 @@ class Home extends React.Component {
                 <CardContent textStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}} text="Welcome Soumya Mohapatra, please enter your current location and destination." />
                 <Input
                     key="src-id"
-                    onChangeText={(text) => {this.setState({src: text})}}
+                    onChangeText={(text) => {this.setState({src: text, validSrcId: isValidRoomId(text)})}}
+                    errorMessage={this.state.validSrcId ? "" : "no room exists"}
+                    errorStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
                     inputStyle={{fontSize: 15, fontFamily: argonTheme.FONTS.Outlook_Font}}
                     placeholder='Current Location'
+                    value={this.state.src}
                     leftIcon={{ type: 'font-awesome', name: 'map-marker', color: argonTheme.COLORS.Outlook_Dark_theme }}
                 />
                 <Input
                     key="dest-id"
-                    onChangeText={(text) => {this.setState({dest: text})}}
+                    onChangeText={(text) => {this.setState({dest: text, validDestId: isValidRoomId(text)})}}
+                    errorMessage={this.state.validDestId ? "" : "no room exists"}
+                    errorStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
                     placeholder='Destination'
+                    value={this.state.dest}
                     inputStyle={{fontSize: 15, fontFamily: argonTheme.FONTS.Outlook_Font}}
                     leftIcon={{ type: 'font-awesome', name: 'map-marker', color: argonTheme.COLORS.Outlook_User_red_dark}}
                 />
-                <CardAction
-                    separator={true}
-                    inColumn={false}>
-                  <CardButton
-                      onPress={() => {this.beginNavigation()}}
-                      title="Start Navigation"
-                      titleStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
-                      color={argonTheme.COLORS.Outlook_Dark_theme}
+                <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                  <CheckBox
+                      value={this.state.pathPenalty===1}
+                      onValueChange={() => {this.setState({pathPenalty: (this.state.pathPenalty+1)%2})}}
                   />
-                </CardAction>
+                  <Text style={{lineHeight: 26, fontFamily: argonTheme.FONTS.Outlook_Font, color: argonTheme.COLORS.Outlook_User_red_dark}}>
+                    Prefer the path with the least number of turns
+                  </Text>
+                </View>
+                {this.showNavBtn()}
               </MaterialCard>
             </ScrollView>
           </View>
