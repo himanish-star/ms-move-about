@@ -17,16 +17,39 @@
 		body {
 			font-family: RobotMedium;
 		}
+		.marker-div {
+			height: 70px;
+			width: 250px;
+			border: 0.2px solid black;
+			text-align: center;
+			padding-top: 20px;
+			font-family: RobotMedium;
+			font-size: large;
+			font-style: italic;
+			z-index: 1000;
+		}
+		#marker_info {
+			height: 350px;
+			width: 350px;
+			background-color: #9feed0;
+			border: 0.2px solid black;
+			font-family: RobotMedium;
+			font-size: large;
+			padding: auto;
+			text-align: center;
+			line-height: 80px;
+		}
 	</style>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
-<body style="background-color: #C7E0F4;">
+<body style="background-color: #FFF;">
 	<div class="container">
 		<div class="row d-flex justify-content-center">
-			<img style="width: auto; height: 100px" src="https://cdn.iconscout.com/icon/free/png-512/microsoft-12-190755.png">
+			<!-- <img style="width: auto; height: 120px" src="https://cdn.iconscout.com/icon/free/png-512/microsoft-12-190755.png"> -->
+			<img style="width: auto; height: 35px; margin-top: 34px;" src="https://static.lgfl.net/LgflNet/images/services/office365/Microsoft-logo-3.jpg">
 			<h1 class="ml-5" style="line-height: 100px; color: black; font-family: BangersRegular">Microsoft Floor Marker</h1>
 		</div>
-		<div style="background-color: black" class="border border-dark row d-flex justify-content-center">
+		<div style="background-color: #FFF" class="row d-flex justify-content-center">
 			<canvas id="Canvas" width="620" height="520"></canvas>
 		</div>
 		<div class="mt-3 row d-flex justify-content-center">
@@ -42,12 +65,12 @@
 					z-index: 1000;
 				}
 			</style>
-			<select style="font-family: BangersRegular" class="col-2 custom-select" name="marker-type" id="m_type">
+			<!-- <select style="font-family: BangersRegular" class="col-2 custom-select" name="marker-type" id="m_type">
 				<option style="color: red" value="red">Red</option>
 				<option style="color: blue" value="blue">Blue</option>
 				<option style="color: green" value="green">Green</option>
 				<option style="color: yellow" value="yellow">Yellow</option>
-			</select>
+			</select> -->
 
 			<button style="font-family: BangersRegular" class="col-2 ml-5 btn btn-warning" id="toggle_grid">Toggle Grid</button>
 			<button style="font-family: BangersRegular" class="col-2 ml-5 btn btn-info" id="save_json">Save JSON</button>
@@ -63,6 +86,22 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="marker_select">
+		<h2 class="ml-5" style="line-height: 70px; color: black; font-family: BangersRegular">Select Marker</h2>
+		<div class="marker-div" id="m_red" style="background-color: #f93535;">Red *</div>
+		<div class="marker-div" id="m_blue" style="background-color: #355fae;">Blue</div>
+		<div class="marker-div" id="m_green" style="background-color: #64c13a;">Green</div>
+		<div class="marker-div" id="m_yellow" style="background-color: #f9c835;">Yellow</div>
+	</div>
+
+	<div id="marker_info">
+		<div><span style="font-family: BangersRegular; font-size: 1.3em; color: #f93535; padding-right: 20px;">Red Marker:</span> Room Nodes</div>
+		<div><span style="font-family: BangersRegular; font-size: 1.3em; color: #355fae; padding-right: 20px;">Blue Marker:</span>Door Nodes</div>
+		<div><span style="font-family: BangersRegular; font-size: 1.3em; color: #64c13a; padding-right: 20px;">Green Marker:</span> Path Nodes</div>
+		<div><span style="font-family: BangersRegular; font-size: 1.3em; color: #f9c835;">Yellow Marker:</span> Common (Path and Door)</div>
+	</div>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
