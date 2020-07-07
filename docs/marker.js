@@ -16,7 +16,7 @@ $(() => {
     const yInputDiv = $('#y_inp');
 
     const mapSprite = new Image();
-    mapSprite.src = "../android-expo/floor_plans/floor_16/floor_bg.png";
+    mapSprite.src = "./floor_plans/floor_16/floor_bg.png";
     /*mapSprite.style.display = "block";
     mapSprite.style.maxWidth = "700px";
     mapSprite.style.height = "auto";
