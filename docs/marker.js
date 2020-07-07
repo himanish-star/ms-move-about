@@ -36,7 +36,7 @@ $(() => {
         this.name = '';
         this.Sprite = new Image();
         this.Sprite.src = `./images/${type}_marker.jpg`;
-        this.Width = 14;
+        this.Width = 22;
         this.Height = 22;
         this.XPos = 0;
         this.YPos = 0;
@@ -80,6 +80,14 @@ $(() => {
         divOpen = false;
     });
 
+    function download(content, fileName, contentType) {
+        var a = document.createElement("a");
+        var file = new Blob([content], {type: contentType});
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
+    }
+
     $('#save_json').click(() => {
         let output_json = {};
         for (let type in Markers) {
@@ -92,10 +100,13 @@ $(() => {
                 if (!(marker_i.name in output_json[keyString])) {
                     output_json[keyString][marker_i.name] = {};
                 }
-                output_json[keyString][marker_i.name]["coords"] = [Number(marker_i.XPos), Number(marker_i.YPos)];
+                output_json[keyString][marker_i.name]["coords"] = [
+                    ((marker_i.XPos/canvas.width())*31.2).toFixed(1),
+                    (26.5 - ((marker_i.YPos/canvas.height())*26.5)).toFixed(1)];
             }
         }
         localStorage.setItem('json', JSON.stringify(output_json));
+        download(JSON.stringify(output_json), 'floor.json', 'application/json');
     });
 
     canvas.click((mouse) => {
@@ -113,8 +124,8 @@ $(() => {
 
             // Entering values to Div
             typeInputDiv.val(markerType);
-            xInputDiv.val(marker.XPos);
-            yInputDiv.val(marker.YPos);
+            xInputDiv.val(((marker.XPos/canvas.width())*31.2).toFixed(1));
+            yInputDiv.val((26.5 - ((marker.YPos/canvas.height())*26.5)).toFixed(1));
 
             moveDiv(infoDiv, marker.XPos + 30, marker.YPos + 40);
             showDiv();
@@ -133,10 +144,11 @@ $(() => {
                 let tempMarker = Markers[type][i];
                 context.drawImage(tempMarker.Sprite, tempMarker.XPos, tempMarker.YPos, tempMarker.Width, tempMarker.Height);
 
-                let markerText = tempMarker.name + "-(X:" + tempMarker.XPos + ", Y:" + tempMarker.YPos + ")";
+                let markerText = tempMarker.name + "-(X:" + ((tempMarker.XPos/canvas.width())*31.2).toFixed(1).toString() + ", Y:" + ((26.5 - ((tempMarker.YPos/canvas.height())*26.5)).toFixed(1)).toString() + ")";
 
                 let textMeasurements = context.measureText(markerText);
                 context.fillStyle = "#888";
+                context.font = "15px BangersRegular";
                 context.globalAlpha = 0.7;
                 context.fillRect(tempMarker.XPos - (textMeasurements.width / 2), tempMarker.YPos - 15, textMeasurements.width, 20);
                 context.globalAlpha = 1;
