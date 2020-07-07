@@ -3,6 +3,12 @@ $(() => {
     const context = canvas[0].getContext("2d");
     context.font = "12px Arial";
     context.textAlign = "center";
+    const toggleGridBtn = $("#toggle_grid");
+    let toggleState = false;
+
+    toggleGridBtn.click(() => {
+        toggleState = !toggleState;
+    });
 
     const markerInput = $('#m_type');
     let markerType = markerInput.val();
@@ -53,6 +59,23 @@ $(() => {
         el.style.left = x + 'px';
         el.style.top = y + 'px';
     };
+
+    function drawBoard(displayOn){
+        const context = canvas[0].getContext("2d");
+        const bw = canvas.width()/31.2;
+        const bh = canvas.height()/26.5;
+        for (let x = 0; x <= canvas.width(); x += bw) {
+            context.moveTo(x, 0);
+            context.lineTo(x, canvas.height());
+        }
+
+        for (let x = canvas.height(); x >= 0; x -= bh) {
+            context.moveTo(0, x);
+            context.lineTo(canvas.width(), x);
+        }
+        context.strokeStyle = displayOn ? "rgba(136,136,136,0.52)" : "rgba(136,136,136,0)";
+        context.stroke();
+    }
 
     const addNameToMarkers = (type, x, y, name) => {
         Markers[type][Markers[type].length - 1].name = name;
@@ -157,7 +180,7 @@ $(() => {
                 context.fillText(markerText, tempMarker.XPos, tempMarker.YPos);
             }
         }
+        drawBoard(toggleState);
     };
-
-    setInterval(draw, (1000 / 60)); // Refresh 60 times a second
+    setInterval(draw, (1000)); // Refresh once a second
 });
