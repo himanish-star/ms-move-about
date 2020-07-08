@@ -81,7 +81,9 @@ const Dijkstra = (source, destination, floorNumber, penalty) => {
 			if (parent[currentNode] != -1) {
 				let angle = getAngle(pathNodes[parent[currentNode]]["coords"], pathNodes[currentNode]["coords"], pathNodes[node]["coords"]);
 				angle = 180 - Math.abs(angle);
-				newDistance += angle * penalty;
+				if (angle >= 30) {
+					newDistance += angle * penalty;
+				}
 			}
 
 			if (!visited[node] && newDistance < distance[node]) {
