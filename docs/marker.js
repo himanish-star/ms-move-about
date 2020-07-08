@@ -60,8 +60,8 @@ $(() => {
         el.style.left = x + 'px';
         el.style.top = y + 'px';
     };
-    moveDiv(markerSelect, 1000, 200);
-    moveDiv(document.getElementById('marker_info'), 5, 225);
+    // moveDiv(markerSelect, 1000, 200);
+    // moveDiv(document.getElementById('marker_info'), 5, 225);
 
     function drawBoard(displayOn){
         const context = canvas[0].getContext("2d");
