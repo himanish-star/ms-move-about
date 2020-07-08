@@ -81,6 +81,7 @@ class Home extends React.Component {
     distToTurn: 0,
     dirToTurn: "straight",
     timeToTurn: 0,
+    eta: 0,
     pathPenalty: 0,
     validSrcId: true,
     validDestId: true,
@@ -100,11 +101,12 @@ class Home extends React.Component {
     });
 
     let time_counter = 1;
-    setTimeout(() => {this.setState({level_animation: true});}, time_counter*1000); time_counter++;
+    setTimeout(() => {this.setState({level_animation: true, eta: this.state.polypath[1].slice(-1)[0]});}, time_counter*1000); time_counter++;
     // console.log(this.state);
+    const eta_total = this.state.polypath[1].slice(-1)[0];
     for(let i=0;i<coords_to_travel.length-1;i++) {
       const distance = i===0 ? this.state.polypath[0][i] : this.state.polypath[0][i] - this.state.polypath[0][i-1];
-      const time = i===0 ? this.state.polypath[1][i] : this.state.polypath[1][i] - this.state.polypath[1][i-1];
+      const time = i===0 ? 0 : this.state.polypath[1][i-1];
       let cal_dir = "straight";
       if(i!==0 && i!==coords_to_travel.length-2) {
         const angle = this.state.polypath[2][i];
@@ -140,8 +142,9 @@ class Home extends React.Component {
           const local_y = c[1] + bh*it*direction_mag;
           it++;
           const ltc = time_counter;
+          const local_eta = eta_total - time;
           setTimeout(() => {
-            this.setState({dirToTurn: dir, distToTurn: distance, timeToTurn: time, gx: local_x, gy: local_y});
+            this.setState({eta: local_eta, dirToTurn: dir, distToTurn: distance, timeToTurn: time, gx: local_x, gy: local_y});
           },ltc * time_duration);
         }
       } else {
@@ -156,8 +159,9 @@ class Home extends React.Component {
           const local_y=Slope*local_x+Constant;
           it++;
           const ltc = time_counter;
+          const local_eta = eta_total - time;
           setTimeout(() => {
-            this.setState({dirToTurn: dir, distToTurn: distance, timeToTurn: time, gx: local_x, gy: local_y});
+            this.setState({eta: local_eta, dirToTurn: dir, distToTurn: distance, timeToTurn: time, gx: local_x, gy: local_y});
           },ltc * time_duration);
           loop_count--;
         }
@@ -166,11 +170,11 @@ class Home extends React.Component {
 
     if(this.state.levels.length) {
       setTimeout(() => {
-        this.setState({dir: "straight", gx: coords_to_travel.slice(-1)[0][0],gy: coords_to_travel.slice(-1)[0][1], waitForLift: true});
+        this.setState({eta: 0, dir: "straight", gx: coords_to_travel.slice(-1)[0][0],gy: coords_to_travel.slice(-1)[0][1], waitForLift: true});
       }, time_counter * time_duration);
     } else {
       setTimeout(() => {
-        this.setState({dir: "straight", gx: coords_to_travel.slice(-1)[0][0],gy: coords_to_travel.slice(-1)[0][1],navigationComplete: true});
+        this.setState({eta: 0, dir: "straight", gx: coords_to_travel.slice(-1)[0][0],gy: coords_to_travel.slice(-1)[0][1],navigationComplete: true});
       }, time_counter * time_duration);
     }
   }
@@ -252,6 +256,7 @@ class Home extends React.Component {
                       validSrcId: true,
                       validDestId: true,
                       gy: 0,
+                      eta: 0,
                       pathPenalty: 0,
                       levels: [],
                       navigationOn: false,
@@ -285,7 +290,7 @@ class Home extends React.Component {
                 separator={true}
                 inColumn={false}>
               <CardButton
-                  onPress={() => {this.setState({waitForLift: false, polyline: null, level_animation: false, current_floor: this.state.levels[0]})}}
+                  onPress={() => {this.setState({waitForLift: false, polyline: null, level_animation: false, eta: 0, current_floor: this.state.levels[0]})}}
                   title="Continue"
                   color={argonTheme.COLORS.Outlook_User_red_dark}
                   titleStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
@@ -332,8 +337,27 @@ class Home extends React.Component {
   }
 
   show_cursor() {
-    if(this.state.level_animation) {
+    if(this.state.level_animation && this.state.gx && this.state.gy) {
       return(<Circle x={this.state.gx} y={this.state.gy} opacity={1} fill={argonTheme.COLORS.Outlook_User_red_dark} r={5}/>);
+    }
+  }
+
+  show_ETA() {
+    if(this.state.eta) {
+      return(
+          <TextSvg
+              fill={argonTheme.COLORS.Outlook_User_red_dark}
+              stroke={argonTheme.COLORS.Outlook_User_red_dark}
+              fontSize="14"
+              fontFamily={argonTheme.FONTS.Outlook_Font}
+              fontWeight="bold"
+              x={mapWidth-80}
+              y={mapHeight-20}
+              textAnchor="middle"
+          >
+            {`ETA: ${Math.round(this.state.eta)} mins`}
+          </TextSvg>
+      );
     }
   }
 
@@ -461,6 +485,18 @@ class Home extends React.Component {
           <View style={{ overflow: "scroll", alignItems: 'center', justifyContent: 'center' }}>
             <ImageBackground resizeMode="contain" source={floor_bgs[this.state.current_floor]} style={[styles.image, {opacity: 1}]}>
               <Svg height={mapHeight} width={mapWidth}>
+                <TextSvg
+                    fill={argonTheme.COLORS.Outlook_Primary_theme}
+                    stroke={argonTheme.COLORS.Outlook_Primary_theme}
+                    fontSize="14"
+                    fontFamily={argonTheme.FONTS.Outlook_Font}
+                    fontWeight="bold"
+                    x="40"
+                    y="40"
+                    textAnchor="middle"
+                >
+                  FL-{this.state.current_floor}
+                </TextSvg>
                 {/*<Line
                     x1={floorPlansJson[this.state.current_floor].red_nodes[this.state.src]@.coords[0]*bw}
                     y1={mapHeight - floorPlansJson[this.state.current_floor].red_nodes[this.state.src].coords[1]*bh}
@@ -475,6 +511,7 @@ class Home extends React.Component {
                     strokeWidth="5"
                 />
                 {this.show_cursor()}
+                {this.show_ETA()}
               </Svg>
             </ImageBackground>
           </View>
