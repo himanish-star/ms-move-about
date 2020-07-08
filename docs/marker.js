@@ -23,7 +23,7 @@ $(() => {
     const redM = $('#m_red'), blueM = $('#m_blue'), greenM = $('#m_green'), yellowM = $('#m_yellow');
 
     const mapSprite = new Image();
-    mapSprite.src = "./floor_plans/floor_16/floor_bg.png";
+    mapSprite.src = "./floor_plans/floor_16/floor_bg_updated.png";
     /*mapSprite.style.display = "block";
     mapSprite.style.maxWidth = "700px";
     mapSprite.style.height = "auto";
