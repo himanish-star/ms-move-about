@@ -23,6 +23,8 @@ const floorPlansJson = {
   16: floor_16_json
 }
 
+const default_room = "16.3I.2"
+
 const time_duration = 1000;
 const dir_icons = {
   "straight": require("../assets/direction_icons/straight.png"),
@@ -74,15 +76,18 @@ class Home extends React.Component {
 
   state = {
     current_floor: 16,
-    src: "16.3A.1",
-    dest: "17.3G.2",
+    src: "",
+    dest: "",
     polyline: null,
     polypath: null,
     distToTurn: 0,
     dirToTurn: "straight",
     timeToTurn: 0,
     eta: 0,
+    selectCurrentLocation: false,
     pathPenalty: 0,
+    idEntrySrc: false,
+    idEntryDest: false,
     validSrcId: true,
     validDestId: true,
     waitForLift: false,
@@ -246,9 +251,7 @@ class Home extends React.Component {
               <CardButton
                   onPress={() => {
                     this.setState({
-                      src: "16.3A.1",
                       waitForLift: false,
-                      dest: "17.3G.2",
                       polyline: null,
                       polypath: null,
                       current_floor: 16,
@@ -344,6 +347,8 @@ class Home extends React.Component {
 
   show_ETA() {
     if(this.state.eta) {
+      const decimal = this.state.eta - Math.floor(this.state.eta);
+      const secString = `${Math.round(decimal*60)} s`;
       return(
           <TextSvg
               fill={argonTheme.COLORS.Outlook_User_red_dark}
@@ -355,14 +360,14 @@ class Home extends React.Component {
               y={mapHeight-20}
               textAnchor="middle"
           >
-            {`ETA: ${Math.round(this.state.eta)} mins`}
+            {`ETA: ${Math.round(this.state.eta)} mins ${secString}`}
           </TextSvg>
       );
     }
   }
 
   showNavBtn () {
-    if(this.state.validSrcId && this.state.validDestId) {
+    if(this.state.validSrcId && this.state.validDestId && this.state.idEntrySrc && this.state.idEntryDest) {
       return(
           <CardAction
               separator={true}
@@ -424,13 +429,28 @@ class Home extends React.Component {
                     avatarSource = {{uri: "https://media-exp1.licdn.com/dms/image/C5603AQH6eF7rO3IpsQ/profile-displayphoto-shrink_400_400/0?e=1599696000&v=beta&t=g0dkGzx5yySX8FWXs0prgJTdaYzIMBOkbASJi4bRFkU"}}
                     title={`Soumya Mohapatra`}
                     titleStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
-                    subtitle = {`empId: 8349202`}
+                    subtitle = {`empId: 8349202, room: ${default_room}`}
                     subtitleStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
                 />
                 <CardContent textStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}} text="Welcome Soumya Mohapatra, please enter your current location and destination." />
+                <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+                  <CheckBox
+                      value={this.state.selectCurrentLocation}
+                      onValueChange={() => {
+                        if(!this.state.selectCurrentLocation) {
+                          this.setState({selectCurrentLocation: !this.state.selectCurrentLocation, src: default_room, idEntrySrc: true, validSrcId: true});
+                        } else {
+                          this.setState({selectCurrentLocation: !this.state.selectCurrentLocation, src: "", idEntrySrc: false, validSrcId: false})
+                        }
+                      }}
+                  />
+                  <Text style={{lineHeight: 26, fontFamily: argonTheme.FONTS.Outlook_Font, color: argonTheme.COLORS.Outlook_Primary_theme}}>
+                    Navigate from current location
+                  </Text>
+                </View>
                 <Input
                     key="src-id"
-                    onChangeText={(text) => {this.setState({src: text, validSrcId: isValidRoomId(text)})}}
+                    onChangeText={(text) => {this.setState({src: text, idEntrySrc: true, validSrcId: isValidRoomId(text)})}}
                     errorMessage={this.state.validSrcId ? "" : "no room exists"}
                     errorStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
                     inputStyle={{fontSize: 15, fontFamily: argonTheme.FONTS.Outlook_Font}}
@@ -440,7 +460,7 @@ class Home extends React.Component {
                 />
                 <Input
                     key="dest-id"
-                    onChangeText={(text) => {this.setState({dest: text, validDestId: isValidRoomId(text)})}}
+                    onChangeText={(text) => {this.setState({dest: text, idEntryDest: true, validDestId: isValidRoomId(text)})}}
                     errorMessage={this.state.validDestId ? "" : "no room exists"}
                     errorStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}
                     placeholder='Destination'
