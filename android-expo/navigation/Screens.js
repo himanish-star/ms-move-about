@@ -135,12 +135,12 @@ const HomeStack = createStackNavigator(
 // divideru se baga ca si cum ar fi un ecrna dar nu-i nimic duh
 const AppStack = createDrawerNavigator(
   {
-    Onboarding: {
+    /*Onboarding: {
       screen: Onboarding,
       navigationOptions: {
         drawerLabel: () => {}
       }
-    },
+    },*/
     Home: {
       screen: HomeStack,
       navigationOptions: navOpt => ({

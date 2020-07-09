@@ -110,7 +110,8 @@ class Home extends React.Component {
     // console.log(this.state);
     const eta_total = this.state.polypath[1].slice(-1)[0];
     for(let i=0;i<coords_to_travel.length-1;i++) {
-      const distance = i===0 ? this.state.polypath[0][i] : this.state.polypath[0][i] - this.state.polypath[0][i-1];
+      let distance = i===0 ? this.state.polypath[0][i] : this.state.polypath[0][i] - this.state.polypath[0][i-1];
+      let nextTurnAtIdx = i;
       const time = i===0 ? 0 : this.state.polypath[1][i-1];
       let cal_dir = "straight";
       if(i!==0 && i!==coords_to_travel.length-2) {
@@ -131,6 +132,17 @@ class Home extends React.Component {
           }
         }
       }
+
+      if(i!==0 && cal_dir==="straight") {
+        for(nextTurnAtIdx=i; nextTurnAtIdx<this.state.polypath[0].length-1;nextTurnAtIdx++) {
+          if(Math.abs(this.state.polypath[2][nextTurnAtIdx])>30) {
+            break;
+          }
+        }
+        // console.log(nextTurnAtIdx, i-1);
+        distance = this.state.polypath[0][nextTurnAtIdx] - this.state.polypath[0][i-1];
+      }
+
       const dir = i===0 ? "straight" : cal_dir;
       const c = coords_to_travel[i], nc = coords_to_travel[i+1];
       const Slope = nc[0]===c[0] ? "infinity" : (nc[1]-c[1])/(nc[0]-c[0]);
