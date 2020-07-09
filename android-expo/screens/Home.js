@@ -486,7 +486,7 @@ class Home extends React.Component {
                       onValueChange={() => {this.setState({pathPenalty: (this.state.pathPenalty+1)%2})}}
                   />
                   <Text style={{lineHeight: 26, fontFamily: argonTheme.FONTS.Outlook_Font, color: argonTheme.COLORS.Outlook_User_red_dark}}>
-                    Prefer the path with the least number of turns
+                    Prefer the path with less turns
                   </Text>
                 </View>
                 {this.showNavBtn()}
