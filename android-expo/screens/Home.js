@@ -1,5 +1,15 @@
 import React from 'react';
-import { Image as ImgReact, CheckBox, Text, View, ImageBackground, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import {
+  Image as ImgReact,
+  CheckBox,
+  Text,
+  View,
+  ImageBackground,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+  AsyncStorage
+} from 'react-native';
 import { Block, theme } from 'galio-framework';
 import Svg, {G, ClipPath, Polygon, Image, Line, Text as TextSvg, Circle, Rect, Polyline} from 'react-native-svg';
 import {Icon, Button, ListItem, Card, Input} from 'react-native-elements'
@@ -73,6 +83,47 @@ class Home extends React.Component {
       </ScrollView>
     )
   }*/
+  componentDidMount() {
+    EventRegister.addEventListener("push-notification-data", (data) => {
+      console.log("push-notification-selected", data);
+      if(data.src) {
+        this.setState({
+          src: data.src,
+          validSrcId: isValidRoomId(data.src),
+          idEntrySrc: true,
+        });
+      }
+      if(data.dest) {
+        this.setState({
+          dest: data.dest,
+          validDestId: isValidRoomId(data.dest),
+          idEntryDest: true,
+        });
+      }
+      AsyncStorage.removeItem("push-notification-data");
+    });
+
+    AsyncStorage.getItem("push-notification-data").then((data) => {
+      if(data) {
+        data = JSON.parse(data);
+        if(data.src) {
+          this.setState({
+            src: data.src,
+            validSrcId: isValidRoomId(data.src),
+            idEntrySrc: true,
+          });
+        }
+        if(data.dest) {
+          this.setState({
+            dest: data.dest,
+            validDestId: isValidRoomId(data.dest),
+            idEntryDest: true,
+          });
+        }
+        AsyncStorage.removeItem("push-notification-data");
+      }
+    });
+  }
 
   state = {
     current_floor: 16,

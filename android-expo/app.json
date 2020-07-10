@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "Argon FREE React Native",
-    "slug": "argon-free-react-native",
+    "name": "Microsoft Move About",
+    "slug": "ms-move-about",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "1.3.0",
+    "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/microsoft_icon_logo.png",
     "splash": {
       "image": "./assets/ms-move-about-splash.png",
       "resizeMode": "cover",
@@ -22,6 +22,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.microsoft.msmoveabout",
+      "googleServicesFile": "./google-services.json",
+    },
     "ios": {
       "supportsTablet": true
     }

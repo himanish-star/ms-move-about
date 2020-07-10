@@ -1,3 +1,5 @@
 .idea
 node_modules/
 package-lock.json
+android-expo/firebaseConfig.json
+android-expo/google-services.json
