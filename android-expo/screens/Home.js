@@ -36,6 +36,7 @@ const floorPlansJson = {
 const default_room = "16.3I.2"
 
 const time_duration = 1000;
+const liftIcon = require("../assets/imgs/lift.png");
 const dir_icons = {
   "straight": require("../assets/direction_icons/straight.png"),
   "left": require("../assets/direction_icons/left.png"),
@@ -345,7 +346,7 @@ class Home extends React.Component {
       return(
           <MaterialCard style={{margin: 10}}>
             <CardTitle
-                avatarSource={{uri: 'https://images.vexels.com/media/users/3/156217/isolated/preview/43b08bbb96d1ef7a1e29fa934084928e-male-female-lift-icon-by-vexels.png'}}
+                avatarSource={liftIcon}
                 title={`Get into the Lift and go to floor ${this.state.levels[0]}`}
                 subtitle={`Click on continue once you have arrived on floor ${this.state.levels[0]}`}
                 titleStyle={{fontFamily: argonTheme.FONTS.Outlook_Font}}

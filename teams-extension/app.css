@@ -1,3 +1,7 @@
 .hidden {
 	display: none;
 }
+
+.disclaimer {
+	width: 200px;
+}

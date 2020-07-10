@@ -81,7 +81,7 @@ class DrawerItem extends React.Component {
           <Text
             size={15}
             bold={focused ? true : false}
-            color={focused ? "white" : "rgba(0,0,0,0.5)"}
+            color={focused ? "white" : argonTheme.COLORS.Outlook_User_red_dark}
           >
             {title}
           </Text>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14
   },
   activeStyle: {
-    backgroundColor: argonTheme.COLORS.ACTIVE,
+    backgroundColor: argonTheme.COLORS.Outlook_Primary_theme,
     borderRadius: 4
   },
   shadow: {

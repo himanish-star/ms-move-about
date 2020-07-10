@@ -148,7 +148,7 @@ const AppStack = createDrawerNavigator(
           <DrawerItem focused={focused} title="Home" />
         )
       })
-    },
+    }/*,
     Profile: {
       screen: ProfileStack,
       navigationOptions: navOpt => ({
@@ -180,7 +180,7 @@ const AppStack = createDrawerNavigator(
           <DrawerItem focused={focused} screen="Articles" title="Articles" />
         )
       })
-    }
+    }*/
   },
   Menu
 );
