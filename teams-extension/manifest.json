@@ -4,6 +4,9 @@
 	"name": "MS Move About",
 	"description": "Integration between Teams and MS Move About",
 	"version": "1.0",
+	"icons": {
+		"1": "./logo_1.png"
+	},
 	"browser_action": {
 	    "default_popup": "popup.html"
 	},
