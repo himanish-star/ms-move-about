@@ -7,11 +7,11 @@ Microsoft Move About is an android application which allows employees to navigat
 
 ### Get Started
 
-## Android App
+## 1) Android App
 
-## Floor Marker - Online Tool
+## 2) Chrome Extension - Microsoft Teams Bot
 
-## Chrome Extension - Microsoft Teams Bot
+## 3) Floor Marker - Online Tool (Note: developers-only)
 
 #### Checklist
 - [x] checkbox for direction penalty
