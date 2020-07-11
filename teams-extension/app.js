@@ -41,6 +41,9 @@ chrome.tabs.getSelected(null, tab => {
 			});
 		});
 	}
+	else {
+		document.querySelector('.route').classList.add('hidden');
+	}
 });
 
 chrome.runtime.onMessage.addListener((request, sender, callback) => {
