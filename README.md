@@ -23,6 +23,22 @@ Microsoft Move About is an android application which allows employees to navigat
     The navigation button will be visible only after the input of valid source and destination ids.
  
 ## 2) Chrome Extension - Microsoft Teams Bot
+   Usually, Employees send their location or table id via chat on Microsoft Teams. To ease their task, this Chrome extension will work as a Bot, that will send notification on their mobile device with the destination table id, clicking on which will auto fill all the details required for navigation. 
+
+ - ### Add this Teams extension to your Chrome browser
+     First, enable this extension by adding it to your Chrome browser.
+
+ - ### Triggering Bot with Special Command
+     To send a request to your co-worker, you need to send this special command to trigger the bot to send him notification on his mobile device. 
+           ‘/route yourTableId’
+
+     For example: 
+         /route 16.3G.1
+
+ - ### Explicitly sending notification to your own device
+     To explicitly send the notification with the destination id to your own device, you can simply click the extension, then click the start button to auto fill navigation details on your mobile application. This will get the destination table id from the latest message of format ‘/route tableId’ and send a notification to MS-Move-About application.
+
+
 
 ## 3) Floor Marker - Online Tool (Note: developers-only)
 
