@@ -2,21 +2,23 @@
 	display: none;
 }
 
-.disclaimer {
-	width: 200px;
+.disclaimer, .mainDiv, .btnDiv {
+	width: 400px;
 	padding-bottom: 10px;
+    font-family: BangersRegular;
 }
 
 .btn {
-	width: 80px;
-	padding-bottom: 5px;
+	/*width: 80px;*/
+    font-family: BangersRegular;
+    /*padding-bottom: 5px;*/
 }
 
 .start-btn {
   background-color: #464775;
   border-radius: 2px;
   color: #f3f2f1;
-  height: 32px;
+  /*height: 32px;*/
   font-weight: bold;
   text-align: center;
   text-decoration: none;

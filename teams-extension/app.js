@@ -42,7 +42,7 @@ chrome.tabs.getSelected(null, tab => {
 		});
 	}
 	else {
-		document.querySelector('.route').classList.add('hidden');
+		document.querySelector('.btn-div').classList.add('hidden');
 	}
 });
 

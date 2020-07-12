@@ -16,6 +16,6 @@
             "js": ["contentScript.js"]
         }
     ],
-    "content_security_policy": "script-src 'self' https://exp.host/--/api/v2/push/send; object-src 'self';",
+	"content_security_policy": "script-src 'self' https://maxcdn.bootstrapcdn.com; object-src 'self';",
 	"permissions": ["tabs"]
 }
