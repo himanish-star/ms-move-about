@@ -50,8 +50,8 @@
  - ### Explicitly sending notification to your own device
      To explicitly send the notification with the destination id to your own device, you can simply click the extension, then click the start button to auto fill navigation details on your mobile application. This will get the destination table id from the latest message of format `/route tableId` and send a notification to MS-Move-About application.
 
-     | | |
      | Push Notification on Phone | Popup display on other tabs |
+     | --- | --- |
      | <img src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM.jpeg" height="400" width="200"></img> | <img height="200" width="400" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2019-37-53.png"></img> |
      
      | Popup display on Teams tab |
