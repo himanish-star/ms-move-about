@@ -25,6 +25,12 @@
     
  - ### Begin Navigation
     The navigation button will be visible only after the input of **valid** source and destination ids.
+     
+      <img src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(4).jpeg" height="400" width="200"></img>
+    
+    <img src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(5).jpeg" height="400" width="200"></img>
+    
+    <img src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(6).jpeg" height="400" width="200"></img>
  
 ## 2) Chrome Extension - Microsoft Teams Bot
    Usually, Employees send their location or table id via chat streams on Microsoft Teams. To ease their task, this Chrome extension will work as a Bot that will send notifications on their mobile device with the destination table id, clicking on which will auto fill all the details required for navigation. 
@@ -46,8 +52,11 @@
  - ### Explicitly sending notification to your own device
      To explicitly send the notification with the destination id to your own device, you can simply click the extension, then click the start button to auto fill navigation details on your mobile application. This will get the destination table id from the latest message of format `/route tableId` and send a notification to MS-Move-About application.
 
+     <img src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM.jpeg" height="400" width="200"></img>
 
 ## 3) Floor Marker - Online Tool (Note: developers-only)
+  - ### Mark new rooms and their coordinates
+      `MS Floor Marker` is an [online tool](https://himanish-star.github.io/ms-move-about/) which allows developers to mark new rooms on the floor.
 
 #### Checklist
 - [x] checkbox for direction penalty
