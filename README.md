@@ -56,7 +56,12 @@
 
 ## 3) Floor Marker - Online Tool (Note: developers-only)
   - ### Mark new rooms and their coordinates
-      `MS Floor Marker` is an [online tool](https://himanish-star.github.io/ms-move-about/) which allows developers to mark new rooms on the floor.
+      - `MS Floor Marker` is an [online tool](https://himanish-star.github.io/ms-move-about/) which allows developers to mark new rooms on the floor.
+      - To place markers, click on the desired location in the canvas to register its coordinates.
+         <img height="400" width="800" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2010-09-52.png">
+      - Fill up the popup box with the `string id` of the marker.
+         <img height="400" width="800" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2010-06-31.png">
+      - On completion, click on the `save json` button to save the json file of the markers.
 
 #### Checklist
 - [x] checkbox for direction penalty
