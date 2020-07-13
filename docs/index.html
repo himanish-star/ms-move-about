@@ -38,17 +38,23 @@
 			z-index: 1000;
 		}
 		#marker_info {
-			height: 350px;
-			width: 300px;
-			background-color: rgba(234, 237, 234, 0.98);
-			border: 0.2px solid black;
-			border-radius: 15px;
-			font-family: RobotMedium;
-			font-size: large;
+			/*height: 350px;*/
+			/*width: 300px;*/
+			/*background-color: rgba(234, 237, 234, 0.98);*/
+			/*border: 0.2px solid black;*/
+			/*border-radius: 15px;*/
+			/*font-family: TekoMedium;*/
+			/*font-size: 25px;*/
 			text-align: center;
 			line-height: 80px;
 		}
+
+		.marker-info-name {
+			font-family: TekoMedium;
+			font-size: 20px;
+		}
 	</style>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body style="background-color: #FFF;">
@@ -59,11 +65,16 @@
 			<h1 class="ml-5" style="line-height: 100px; color: black; font-family: BangersRegular">Microsoft Floor Marker</h1>
 		</div>
 		<div style="background-color: #FFF" class="row d-flex justify-content-around">
-			<div id="marker_info">
-				<div style="font-family: YanoneKaffeesatzMedium; display: flex; justify-content: center; font-size: 1em"><span style="font-family: BangersRegular; font-size: 1.3em; color: #f93535; padding-right: 20px;">Red Marker:</span> <span class="ml-3">Room </span></div>
-				<div style="font-family: YanoneKaffeesatzMedium; display: flex; justify-content: center; font-size: 1em"><span style="font-family: BangersRegular; font-size: 1.3em; color: #355fae; padding-right: 20px;">Blue Marker:</span> <span class="ml-3">Door Nodes</span></div>
-				<div style="font-family: YanoneKaffeesatzMedium; display: flex; justify-content: center; font-size: 1em"><span style="font-family: BangersRegular; font-size: 1.3em; color: #64c13a; padding-right: 20px;">Green Marker:</span> <span class="ml-3">Path Nodes</span></div>
-				<div style="font-family: YanoneKaffeesatzMedium; display: flex; justify-content: center; font-size: 1em"><span style="font-family: BangersRegular; font-size: 1.3em; color: #f9c835;">Yellow Marker:</span> <span class="ml-3">Common (Path and Door)</span></div>
+			<div>
+				<div style="font-family: TekoMedium; font-size: 25px; text-align: center" class="alert alert-warning">
+					<i class="fa fa-info-circle"></i> Read the <a href="./user_manual">User Manual</a>
+				</div>
+				<div class="alert alert-primary" id="marker_info">
+					<div style="font-family: TekoMedium; display: flex; justify-content: start;"><span style="font-family: BangersRegular; font-size: 1.3em; color: #f93535;">Red Marker:</span> <span class="marker-info-name ml-3">Room </span></div>
+					<div style="font-family: TekoMedium; display: flex; justify-content: start;"><span style="font-family: BangersRegular; font-size: 1.3em; color: #355fae;">Blue Marker:</span> <span class="marker-info-name ml-3">Door Nodes</span></div>
+					<div style="font-family: TekoMedium; display: flex; justify-content: start;"><span style="font-family: BangersRegular; font-size: 1.3em; color: #64c13a;">Green Marker:</span> <span class="marker-info-name ml-3">Path Nodes</span></div>
+					<div style="font-family: TekoMedium; display: flex; justify-content: start;"><span style="font-family: BangersRegular; font-size: 1.3em; color: #f9c835;">Yellow Marker:</span> <span class="marker-info-name ml-3">Common (Path and Door)</span></div>
+				</div>
 			</div>
 			<canvas id="Canvas" width="620" height="520"></canvas>
 			<div id="marker_select">
