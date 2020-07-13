@@ -18,7 +18,7 @@
      
     | | | 
     | --- | --- |
-    | <img height="400" width="200" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(2).jpeg"></img> | <img height="400" width="200" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(1).jpeg"></img> | 
+    | <img height="400" width="200" src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(2).jpeg"></img> | <img height="400" width="200" src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(1).jpeg"></img> | 
     
  - ### Choose the path with the least turns (optional)
     This is usually preferrable for people on the `wheel-chair`. This path doesn't guarantee the shortest path but yes it does guarantee the path with the least turns.
@@ -28,7 +28,7 @@
      
      | | | |
      | --- | --- | --- | 
-     | <img src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(4).jpeg" height="400" width="200"></img> | <img src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(5).jpeg" height="400" width="200"></img> | <img src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(6).jpeg" height="400" width="200"></img> | 
+     | <img src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(4).jpeg" height="400" width="200"></img> | <img src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(5).jpeg" height="400" width="200"></img> | <img src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM%20(6).jpeg" height="400" width="200"></img> | 
  
 ## 2) Chrome Extension - Microsoft Teams Bot
    Usually, Employees send their location or table id via chat streams on Microsoft Teams. To ease their task, this Chrome extension will work as a Bot that will send notifications on their mobile device with the destination table id, clicking on which will auto fill all the details required for navigation. 
@@ -45,24 +45,24 @@
           /route 17.3F.1
          ```
      
-     ![teams-bot-image](https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2007-50-48.png)
+     ![teams-bot-image](https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2007-50-48.png)
 
  - ### Explicitly sending notification to your own device
      To explicitly send the notification with the destination id to your own device, you can simply click the extension, then click the start button to auto fill navigation details on your mobile application. This will get the destination table id from the latest message of format `/route tableId` and send a notification to MS-Move-About application.
 
      | Push Notification on Phone | Popup display on other tabs |
      | --- | --- |
-     | <img src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM.jpeg" height="400" width="200"></img> | <img height="200" width="400" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2019-37-53.png"></img> |
+     | <img src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/WhatsApp%20Image%202020-07-12%20at%207.57.24%20AM.jpeg" height="400" width="200"></img> | <img height="200" width="400" src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2019-37-53.png"></img> |
      
      | Popup display on Teams tab |
      | --- |
-     | <img height="200" width="400" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2019-38-16.png"></img> |
+     | <img height="200" width="400" src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2019-38-16.png"></img> |
 
 ## 3) Floor Marker - Online Tool (Note: developers-only)
   - ### Mark new rooms and their coordinates
       - `MS Floor Marker` is an [online tool](https://himanish-star.github.io/ms-move-about/) which allows developers to mark new rooms on the floor.
       - To place markers, click on the desired location in the canvas to register its coordinates.
-         <img height="400" width="800" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2010-09-52.png">
+         <img height="400" width="800" src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2010-09-52.png">
       - Fill up the popup box with the `string id` of the marker.
-         <img height="400" width="800" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2010-06-31.png">
+         <img height="400" width="800" src="https://himanish-star.github.io/ms-move-about/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2010-06-31.png">
       - On completion, click on the `save json` button to save the json file of the markers.
