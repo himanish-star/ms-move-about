@@ -66,11 +66,3 @@
       - Fill up the popup box with the `string id` of the marker.
          <img height="400" width="800" src="https://github.com/himanish-star/ms-move-about/raw/master/docs/images/ms-move-about-pics/Screenshot%20from%202020-07-12%2010-06-31.png">
       - On completion, click on the `save json` button to save the json file of the markers.
-
-## Checklist
-- [x] checkbox for direction penalty
-- [x] checkbox for current location as default user location from profile
-- [x] route time
-- [x] cumulative time and distance display 
-- [ ] 3D icons on mobile view
-- [x] web-marker website
